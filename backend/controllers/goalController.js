@@ -1,10 +1,12 @@
 const asynchandler = require('express-async-handler')
 
+const Goal = require('../models/goalModel')
 // @desc GET goals
 // @route GET /api/goals
 // @access private
 const getGoals = asynchandler(async (req,res) => {
-    res.status(200).json({message: 'Get goals'})
+    const goals = await Goal.find()
+    res.status(200).json(goals)
 })
 
 // @desc Set goal
@@ -15,7 +17,10 @@ const setGoals = asynchandler(async (req,res) => {
         res.status(400)
         throw new Error('Please add a text field!')
     }
-    res.status(200).json({message: 'Set goal'})
+    const goal = await Goal.create({
+        text: req.body.text,
+    })
+    res.status(200).json(goal)
 })
 
 // @desc update goal
@@ -31,7 +36,7 @@ const updateGoals = asynchandler(async (req,res) => {
 const deleteGoals = asynchandler(async (req,res) => {
     res.status(200).json({message: `Delete goal ${req.params.id}` })
 })
-
+// mongodb+srv://srsohan150626:MeRn2022@mernapp.fpccs.mongodb.net/mernapp
 module.exports = {
     getGoals,
     setGoals,
