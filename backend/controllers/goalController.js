@@ -36,7 +36,6 @@ const updateGoals = asynchandler(async (req,res) => {
 const deleteGoals = asynchandler(async (req,res) => {
     res.status(200).json({message: `Delete goal ${req.params.id}` })
 })
-// mongodb+srv://srsohan150626:MeRn2022@mernapp.fpccs.mongodb.net/mernapp
 module.exports = {
     getGoals,
     setGoals,
